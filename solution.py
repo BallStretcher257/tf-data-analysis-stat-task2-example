@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
 
-from scipy.stats import norm
+from scipy.stats import chi2
 
+chat_id = 625760313  # Ваш chat ID, не меняйте название переменной
 
-chat_id = 123456 # Ваш chat ID, не меняйте название переменной
 
 def solution(p: float, x: np.array) -> tuple:
     # Измените код этой функции
@@ -12,6 +12,6 @@ def solution(p: float, x: np.array) -> tuple:
     # Не меняйте название функции и её аргументы
     alpha = 1 - p
     loc = x.mean()
-    scale = np.sqrt(np.var(x)) / np.sqrt(len(x))
-    return loc - scale * norm.ppf(1 - alpha / 2), \
-           loc - scale * norm.ppf(alpha / 2)
+    scale = 1 / (2 * x.sum())
+    return loc + scale * chi2.ppf(alpha / 2, 2 * len(x)),\
+        loc + scale * chi2.ppf(1 - alpha / 2, 2 * len(x))

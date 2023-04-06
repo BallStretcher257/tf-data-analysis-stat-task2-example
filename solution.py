@@ -14,5 +14,5 @@ def solution(p: float, x: np.array) -> tuple:
     loc = x.mean()
     n = len(x)
     scale = 1 / 4802
-    return scale * (loc + 1 / 2 - erlang.ppf(1 - alpha / 2, n, loc=0, scale=(1 / n))), \
-           scale * (loc + 1 / 2 - erlang.ppf(alpha / 2, n, loc=0, scale=(1 / n)))
+    return scale * (erlang.ppf(alpha / 2, n, loc=0, scale=(1 / n)) + loc - 1 / 2), \
+           scale * (erlang.ppf(1 - alpha / 2, n, loc=0, scale=(1 / n)) + loc - 1 / 2)
